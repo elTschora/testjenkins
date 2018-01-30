@@ -1,0 +1,31 @@
+package fr.insarouen.asi.asiaventure.elements.tests;
+
+import fr.insarouen.asi.asiaventure.Monde;
+import fr.insarouen.asi.asiaventure.elements.structure.Piece;
+import fr.insarouen.asi.asiaventure.elements.objets.PiedDeBiche;
+import fr.insarouen.asi.asiaventure.elements.objets.Objet;
+import fr.insarouen.asi.asiaventure.ObjetAbsentDeLaPieceException;
+import fr.insarouen.asi.asiaventure.EntiteDejaDansUnAutreMondeException;
+import fr.insarouen.asi.asiaventure.NomDEntiteDejaUtiliseDansLeMondeException;
+
+
+public class testClassPiece{
+    public static void main(String[] args) throws Exception{
+Monde m = new Monde("patate");
+Piece laPiece= new Piece("chiote",m){};
+PiedDeBiche pdb= new PiedDeBiche("pdb1",m);
+
+try{
+    laPiece.retirer(pdb.getNom());
+}
+
+catch (ObjetAbsentDeLaPieceException e){
+    e.printStackTrace();
+}
+
+
+}
+
+
+
+}

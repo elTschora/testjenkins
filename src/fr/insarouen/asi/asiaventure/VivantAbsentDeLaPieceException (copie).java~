@@ -1,0 +1,7 @@
+package fr.insarouen.asi.asiaventure;
+
+public class VivantAbsentDeLaPieceException extends PieceException{
+    public VivantAbsentDeLaPieceException (String s){
+	super(s);
+	    }
+}

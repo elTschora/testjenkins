@@ -1,0 +1,144 @@
+
+package fr.insarouen.asi.asiaventure.elements.vivants;
+
+import java.util.Arrays;
+import java.lang.String;
+import java.lang.StringBuilder;
+import java.util.Collection;
+import fr.insarouen.asi.asiaventure.elements.Entite;
+import fr.insarouen.asi.asiaventure.elements.structure.Piece;
+import fr.insarouen.asi.asiaventure.elements.objets.Objet;
+import fr.insarouen.asi.asiaventure.Monde;
+public class Vivant extends Entite {
+    String nom;
+    Monde monde;
+    int pointVie;
+    int pointForce;
+    Piece piece;
+    Objet[] objets;
+    public Vivant(String nom, Monde monde, int pointVie, int pointForce, Piece piece,Objet[] objets)    {
+	super(nom,monde);
+        this.pointVie=pointVie;
+        this.pointForce=pointForce;
+        this.piece=piece;
+        this.objets=objets;
+    }
+    public Objet getObjet(int i){
+	return objets[i];
+    }
+    public Objet[] getObjets(){
+	return this.objets;
+    }
+    public Objet getObjet(String nomObjet){
+	if (this.possede(nomObjet)){
+	      return (Objet)this.getMonde().getEntite(nomObjet);
+	}
+	else return null;
+    }
+    public int getPointVie(){
+	    return pointVie;
+	}
+    public int getPointForce(){
+	    return pointForce;
+	}
+
+    public Piece getPiece(){
+	    return this.piece;
+	}
+    public boolean possede(String nomObjet){
+	int i=0;
+	boolean res=false;
+	while (!res && i<this.objets.length){
+	    res=this.getObjet(i).getNom().equals(nomObjet);
+	    i++;
+	}
+	return res;
+    }
+    
+    public boolean possede(Objet objet){
+	int i=0;
+	boolean res=false;
+	while (!res && i<this.objets.length){
+	    res=this.getObjet(i).equals(objet);
+	    i++;
+	}
+	return res;
+    }
+    
+    public void prendre(Objet obj){
+	Objet o;
+	if (this.piece.contientObjet(obj)){
+	    o=this.piece.retirer(obj);
+	    int taille =this.objets.length;
+	    objets=Arrays.copyOf(this.objets,taille+1);
+	    objets[taille]=o;
+	    this.objets=objets;
+       	}
+    }
+    public void prendre(String nomObj){
+	Objet o;
+	if (this.piece.contientObjet(nomObj)){
+	    o=this.piece.retirer(nomObj);
+	    int taille =this.objets.length;
+	    objets=Arrays.copyOf(this.objets,taille+1);
+	    objets[taille]=o;
+	    this.objets=objets;
+       	}
+    }
+
+    public void retirer(String nomObjet){
+	if (this.possede(nomObjet)){
+	    int i=0;
+	    boolean res=false;  
+	    while (!res && i<this.objets.length){
+		res=this.getObjet(i).getNom().equals(nomObjet);
+		i++;
+	    }
+	    i--;
+	    objets[i]=objets[this.objets.length-1];
+	    objets=Arrays.copyOf(objets,this.objets.length-1);
+	}
+	this.piece.deposer( (Objet)this.getPiece().getMonde().getEntite(nomObjet) );
+    }
+
+    public void retirer(Objet objet){
+	if (this.possede(objet)){
+	    int i=0;
+	    boolean res=false;
+	    while (!res && i<objets.length){
+		res=this.getObjet(i).equals(objet);
+		i++;
+	    }
+	    objets[i-1]=objets[objets.length-1];
+	    objets=Arrays.copyOf(objets,objets.length-1);
+	}
+	this.piece.deposer(objet);
+    }
+    
+    public String toString(){
+	int i;
+	StringBuilder str=new StringBuilder();
+	str.append(getNom());
+	str.append("\n");
+	str.append("Habite dans le monde : ");
+	str.append(getMonde().getNom());
+	str.append("\n");
+	str.append("Points de vie : ");
+	str.append(Integer.toString(getPointVie()));
+	str.append("\n");
+	str.append("Points de Force : ");
+	str.append(Integer.toString(getPointForce()));
+	str.append("\n");
+	str.append("Est dans la piece : ");
+	str.append(getPiece().getNom());
+	str.append("\n");
+	str.append("Possède les objets : ");
+       	for (i=0;i<objets.length;i++)
+	    {
+              	str.append("\n\t\t   ");
+		str.append(getObjet(i).toString());
+	    }
+	return str.toString();
+    }
+}
+      

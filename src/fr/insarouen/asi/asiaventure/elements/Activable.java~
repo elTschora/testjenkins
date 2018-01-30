@@ -1,0 +1,9 @@
+package fr.insarouen.asi.asiaventure.elements;
+
+import fr.insarouen.asi.asiaventure.elements.objets.Objet;
+
+public interface Activable{
+    boolean activableAvec(Objet obj);
+    void activer();
+    void activerAvec(Objet obj);
+}

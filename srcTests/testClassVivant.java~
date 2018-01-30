@@ -1,0 +1,26 @@
+package fr.insarouen.asi.asiaventure.elements.tests;
+import fr.insarouen.asi.asiaventure.elements.Vivant;
+
+public class testClassVivant{
+    public static void main(String[] args){
+	Monde monde= new Monde("Monde des ours");
+	Piece piece=new Piece("Toilettes",monde);
+	PiedDeBiche pdb1= new PiedDeBiche("pied1",monde);
+	PiedDeBiche pdb3= new PiedDeBiche("pied3",monde);
+	PiedDeBiche pdb2= new PiedDeBiche("pied2",monde);
+	Objet[] objets=new Objet[0];
+	Vivant vivant=new Vivant("PnJ",monde,24,42,piece,objets);
+	piece.deposer(pdb1);
+	piece.deposer(pdb2);
+	piece.deposer(pdb3);
+
+	vivant.prendre(pdb1);
+	vivant.prendre("pied3");
+	vivant.prendre(pdb2);
+
+	vivant.retirer(pdb1);
+	vivant.retirer("pied2");
+	System.out.println(vivant.toString());
+	System.out.println(piece.toString());
+    }
+}

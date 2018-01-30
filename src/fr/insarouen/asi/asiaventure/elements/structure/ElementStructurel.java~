@@ -1,0 +1,12 @@
+package fr.insarouen.asi.asiaventure.elements.structure;
+
+import fr.insarouen.asi.asiaventure.elements.Entite;
+import fr.insarouen.asi.asiaventure.Monde;
+import fr.insarouen.asi.asiaventure.ElementStructurelException;
+
+public abstract class ElementStructurel extends Entite {
+    public ElementStructurel(String nom,Monde monde)throws Exception{
+	super(nom,monde);
+    }
+} 
+    

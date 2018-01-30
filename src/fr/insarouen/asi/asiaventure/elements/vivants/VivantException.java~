@@ -1,0 +1,7 @@
+package fr.insarouen.asi.asiaventure.elements.vivants;
+import fr.inarouen.asi.asiaventure.ASIAventureException;
+public class VivantException extends ASIAventureException{
+    public VivantException(String s){
+	super(s);
+	    }
+}

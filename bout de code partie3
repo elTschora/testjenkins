@@ -1,0 +1,8 @@
+	System.out.println(piece.toString());
+	System.out.println("Que voulez vous faire?");
+	Scanner sc = new Scanner(System.in);
+	String action = sc.next();
+	String param = sc.next();
+	System.out.println(action);
+	System.out.println(param);
+coucou

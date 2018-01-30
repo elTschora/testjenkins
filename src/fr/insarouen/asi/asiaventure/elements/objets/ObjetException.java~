@@ -1,0 +1,7 @@
+package fr.insarouen.asi.asiaventure.elements.objets;
+
+public class ObjetException extends ASIAventureException{
+    public ObjetException(String s){
+	super(s);
+	    }
+}

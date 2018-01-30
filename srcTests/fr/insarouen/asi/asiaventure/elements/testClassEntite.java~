@@ -1,0 +1,48 @@
+package fr.insarouen.asi.asiaventure.elements;
+import fr.insarouen.asi.asiaventure.Monde;
+import fr.insarouen.asi.asiaventure.elements.Entite;
+import fr.insarouen.asi.asiaventure.NomDEntiteDejaUtiliseDansLeMondeException;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Ignore;
+import org.junit.Test;
+import org.hamcrest.core.IsEqual;
+import static org.hamcrest.core.IsEqual.equalTo;
+import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertThat;
+
+
+
+public class testClassEntite{
+    public Entite entite;
+    public Monde monde;
+
+    @Before
+    public void avantTest() throws Exception{
+	monde=new Monde("Planete Terre");
+	entite=new Entite("Monstre",monde){};
+    }
+
+    @Test
+    public void testConstructeur(){
+	assertThat(entite.getNom(),equalTo("Monstre"));
+	assertThat(entite.getMonde(),equalTo(monde));
+	}
+
+    @Test
+    public void testGetNom(){
+	assertThat(entite.getNom(),equalTo("Monstre"));
+    }
+
+    @Test
+    public void testGetMonde(){
+	assertThat(entite.getMonde(),equalTo(monde));
+    }
+
+    @Test
+    public void testHashCode(){
+	assertThat(entite.hashCode(),equalTo(entite.getNom().hashCode()*7+entite.getMonde().hashCode()*7));
+    }
+}
+

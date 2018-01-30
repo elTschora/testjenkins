@@ -1,0 +1,181 @@
+package fr.insarouen.asi.asiaventure.elements.structure;
+
+import fr.insarouen.asi.asiaventure.elements.structure.ElementStructurel;
+import fr.insarouen.asi.asiaventure.elements.objets.Objet;
+import fr.insarouen.asi.asiaventure.elements.vivants.Vivant;
+import fr.insarouen.asi.asiaventure.Monde;
+import java.lang.StringBuilder;
+import java.util.Arrays;
+import java.util.Collection;
+import fr.insarouen.asi.asiaventure.ObjetAbsentDeLaPieceException;
+
+public class Piece extends ElementStructurel{
+    private Objet[] objets;
+    private Vivant[] vivants;
+
+  public Piece(String nom, Monde monde){
+	super(nom,monde);
+	objets=new Objet[0];
+	vivants=new Vivant[0];
+    }
+
+	public Objet[] getObjets(){
+		return objets;
+	}
+	
+	public Vivant[] getVivants(){
+		return vivants;
+	}
+	
+	public Vivant getVivant(int i){
+		return vivants[i];
+	}
+
+    public Objet  getObjet(int i){
+	return objets[i];
+	  }
+
+    public String  toString(){
+        int i;
+        StringBuilder str = new StringBuilder();
+		str.append("Nom de la piece :");
+		str.append(super.getNom());
+		str.append("\nObjets présents : ");
+	  	for (i=0;i<getObjets().length;i++)
+		    {
+                     	str.append("\n\t\t   ");
+						str.append(getObjet(i).toString());
+		    }
+		str.append("\nVivants présents : ");
+	  	for (i=0;i<getVivants().length;i++)
+		    {
+                     	str.append("\n\t\t   ");
+						str.append(getVivant(i).toString());
+		    }
+	return str.toString();
+    }
+    
+public boolean contientVivant(Vivant vivant){
+	int i=0;
+	boolean res=false;
+	while (i<getVivants().length && !res){		
+		res=getVivant(i).equals(vivant);
+		i++;
+	}
+	return res;
+}
+
+public boolean contientVivant(String nomVivant){
+	int i=0;
+	boolean res=false;
+	while (i<getVivants().length && !res){		
+		res=getVivant(i).getNom().equals(nomVivant);
+		i++;
+	}
+	return res;
+}
+
+public void entrer(Vivant vivant){
+	if (!contientVivant(vivant)){
+		int taille =this.getVivants().length;
+		vivants=Arrays.copyOf(this.getVivants(),taille+1);
+		vivants[taille]=vivant;
+		this.vivants=vivants;
+	}
+}
+	
+public Vivant sortir(Vivant vivant){
+	if (contientVivant(vivant)){
+		int i=0;
+		boolean res=false;
+		while (!res && i<getVivants().length){
+		res=this.getVivant(i).equals(vivant);
+		i++;
+	}
+		vivants[i-1]=vivants[vivants.length-1];
+		vivants=Arrays.copyOf(vivants,vivants.length-1);
+	}
+	return vivant;
+}
+
+public Vivant sortir(String nomVivant){
+  if (this.contientVivant(nomVivant)){
+    int i=0;
+    boolean res=false;
+
+    while (!res && i<this.getVivants().length){
+      res=this.getVivant(i).getNom().equals(nomVivant);
+      i++;
+  }
+       i--;
+       vivants[i]=vivants[this.getVivants().length-1];
+       vivants=Arrays.copyOf(vivants,this.getVivants().length-1);
+}
+  return (Vivant)this.getMonde().getEntite(nomVivant);
+}
+		
+
+
+public void deposer(Objet obj){
+  int taille =this.getObjets().length;
+  objets=Arrays.copyOf(this.getObjets(),taille+1);
+  objets[taille]=obj;
+  this.objets=objets;
+}
+
+public boolean contientObjet(String nomObjet){
+  int i=0;
+  boolean res=false;
+  while (!res && i<this.getObjets().length){
+    res=this.getObjet(i).getNom().equals(nomObjet);
+    i++;
+
+  }
+  return res;
+}
+public boolean contientObjet(Objet objet){
+  int i=0;
+  boolean res=false;
+  while (!res && i<this.getObjets().length){
+    res=this.getObjet(i).equals(objet);
+    i++;
+
+  }
+  return res;
+}
+
+public Objet retirer(String nomObjet) throws ObjetAbsentDeLaPieceException {
+  if (this.contientObjet(nomObjet)){
+    int i=0;
+    boolean res=false;
+
+    while (!res && i<this.getObjets().length){
+      res=this.getObjet(i).getNom().equals(nomObjet);
+      i++;
+  }
+       i--;
+       objets[i]=objets[this.getObjets().length-1];
+       objets=Arrays.copyOf(objets,this.getObjets().length-1);
+}
+  else throw new ObjetAbsentDeLaPieceException(nomObjet+" n'est pas présent dans la pièce");
+  return (Objet)this.getMonde().getEntite(nomObjet);
+}
+
+
+public Objet retirer(Objet objet){
+  if (this.contientObjet(objet)){
+    int i=0;
+    boolean res=false;
+    while (!res && i<getObjets().length){
+      res=this.getObjet(i).equals(objet);
+      i++;
+  }
+       objets[i-1]=objets[objets.length-1];
+       objets=Arrays.copyOf(objets,objets.length-1);
+}
+return objet;
+}
+
+
+
+}

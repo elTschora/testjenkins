@@ -1,0 +1,21 @@
+package fr.insarouen.asi.asiaventure.tests;
+import fr.insarouen.asi.asiaventure.Monde;
+import fr.insarouen.asi.asiaventure.elements.Entite;
+import fr.insarouen.asi.asiaventure.NomDEntiteDejaUtiliseDansLeMondeException;
+
+
+public class testClassEntite{
+    public static void main(String[] args) throws NomDEntiteDejaUtiliseDansLeMondeException{
+	Monde monde=new Monde("Monde des Bisnounours");
+	Entite entite =new Entite("Bite",monde){ };
+	try{
+	    Entite entite =new Entite("Bite",monde){ };
+	}
+	catch(NomDEntiteDejaUtiliseDansLeMondeException e){
+	    e.printStackTrace();
+	}
+	
+	// System.out.println(entite.equals(entite2));
+	System.out.println(entite.toString());
+        }
+}

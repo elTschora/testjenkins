@@ -1,0 +1,31 @@
+package fr.insarouen.asi.asiaventure.tests;
+import fr.insarouen.asi.asiaventure.Monde;
+import fr.insarouen.asi.asiaventure.elements.Entite;
+import fr.insarouen.asi.asiaventure.NomDEntiteDejaUtiliseDansLeMondeException;
+import fr.insarouen.asi.asiaventure.EntiteDejaDansUnAutreMondeException;
+//import fr.insarouen.asi.asiaventure.elements.Objet;
+//import fr.insarouen.asi.asiaventure.elements.PiedDeBiche;
+//import fr.insarouen.asi.asiaventure.elements.ElementStructurel;
+
+public class testClassMonde{
+    public static void main(String[] args) throws Exception{
+	Monde monde=new Monde("Raclette");
+	Monde monde1=new Monde("Kebab?");
+	
+	Entite entite =new Entite("Test",monde){ };
+	
+	try{
+	    Entite entite2 =new Entite("Test",monde){ };
+	}
+	catch(NomDEntiteDejaUtiliseDansLeMondeException e){
+	    e.printStackTrace();
+	}
+	
+	try{
+	monde1.ajouter(entite);
+	}
+	catch(EntiteDejaDansUnAutreMondeException e){
+	    e.printStackTrace();
+	}
+    }
+}

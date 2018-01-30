@@ -1,0 +1,16 @@
+package fr.insarouen.asi.asiaventure.elements.tests;
+import fr.insarouen.asi.asiaventure.elements.Monde;
+
+
+public class testClassObjet{
+    public static void main(String[] args){
+	Monde monde=new Monde("Monde des Blattes");
+	
+	Objet objet=new Objet("Pied de biche de Malandain",monde){
+	       	public boolean estDeplacable(){
+		 return true;
+	       	}
+	    };
+	System.out.println(objet.toString());
+        }
+}

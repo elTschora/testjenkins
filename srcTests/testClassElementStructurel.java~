@@ -1,0 +1,12 @@
+package fr.insarouen.asi.asiaventure.tests;
+
+
+import fr.insarouen.asi.asiaventure.elements.ElementStructurel;
+ public class testClassElementStructurel{
+public static void main(String[] args){
+Monde m = new Monde("patate");
+ElementStructurel struct= new ElementStructurel("tente",m){};
+System.out.println(struct.toString());
+}
+
+}

@@ -1,0 +1,52 @@
+package fr.insarouen.asi.asiaventure;
+import java.util.Arrays;
+import java.lang.StringBuilder;
+
+public class Monde{
+    private String nom;
+    private Entite[] entites;
+    public Monde(String nomDuMonde){
+	nom=nomDuMonde;
+	entites=new Entite[0];
+    }
+    public String getNom(){
+	return nom;
+    }
+
+    public Entite getEntite(int i){
+        return entites[i];
+    }
+
+    public Entite getEntite(String nomEnt){
+      int i=0;
+      boolean res=false;
+
+      while (!res && i<this.entites.length){
+        res=this.getEntite(i).getNom().equals(nomEnt);
+        i++;
+    }
+    return getEntite(i-1);
+    }
+    public void ajouter(Entite entite){
+	int taille=this.entites.length;
+	//entites= new Entite[taille+1];
+	entites=Arrays.copyOf(this.entites,taille+1);
+	entites[taille]=entite;
+       	this.entites=entites;
+    }
+    public String toString(){
+	int i;
+	StringBuilder str = new StringBuilder();
+	str.append("Nom du monde : ");
+	str.append(getNom());
+	str.append("\nEntités présentes : ");
+	for (i=0;i<entites.length;i++)
+	    {
+		str.append("\n\t\t   ");
+		str.append(getEntite(i).toString());
+
+	    }
+	return str.toString();
+
+    }
+}

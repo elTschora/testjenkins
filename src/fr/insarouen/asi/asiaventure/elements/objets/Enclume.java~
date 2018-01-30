@@ -1,0 +1,12 @@
+package fr.insarouen.asi.asiaventure.elements.objets;
+import fr.insarouen.asi.asiaventure.elements.objets.Objet;
+import fr.insarouen.asi.asiaventure.Monde;
+import fr.insarouen.asi.asiaventure.NomDEntiteDejaUtiliseDansLeMondeException;
+public class PiedDeBiche extends Objet {
+    public PiedDeBiche(String nom, Monde monde) throws Exception{
+	super(nom,monde);
+    }
+    public boolean estDeplacable(){
+	return false;
+}
+}	

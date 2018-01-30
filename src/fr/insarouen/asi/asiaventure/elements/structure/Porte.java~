@@ -1,0 +1,58 @@
+package fr.insarouen.asi.asiaventure.elements.structure;
+import java.lang.StringBuilder;
+import fr.insarouen.asi.asiaventure.elements.Activable;
+import fr.insarouen.asi.asiaventure.elements.objets.Objet;
+import fr.insarouen.asi.asiaventure.Monde;
+import fr.insarouen.asi.asiaventure.elements.Etat;
+import fr.insarouen.asi.asiaventure.NomDEntiteDejaUtiliseDansLeMondeException;
+import fr.insarouen.asi.asiaventure.EntiteDejaDansUnAutreMondeException;
+
+public class Porte extends ElementStructurel implements Activable{
+    public String nom;
+    public Monde monde;
+    public Piece pieceA;
+    public Piece pieceB;
+    public Etat etat;
+
+    public Porte(String nom, Monde monde, Piece pieceA, Piece pieceB) throws Exception{
+	super(nom,monde);
+	this.pieceA=pieceA;
+	this.pieceB=pieceB;
+	this.etat=Etat.FERME;
+    }
+	
+    public Etat getEtat(){
+	return this.etat;
+    }
+
+    public Piece getPieceAutreCote(Piece piece){
+	if (this.pieceA.equals(piece)){
+	    return pieceB;
+	}
+        else {
+	    return pieceA;
+        }
+    }
+
+    public void activerAvec(Objet obj){
+    }
+
+    public void activer(){
+    }
+
+    public boolean activableAvec(Objet obj){
+	return true;
+    }
+
+    public String toString(){
+	StringBuilder str=new StringBuilder();
+	str.append(super.toString());
+	str.append("\n Relie les pièces : ");
+	str.append(this.pieceA.toString());
+	str.append(" et ");
+	str.append(this.pieceB.toString());
+	str.append("\nCette porte est ");
+	str.append(this.getEtat().name());
+	return str.toString();
+    }
+}

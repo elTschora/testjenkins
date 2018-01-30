@@ -1,0 +1,60 @@
+package fr.insarouen.asi.asiaventure.elements.structure;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Ignore;
+import org.junit.Test;
+import org.hamcrest.core.IsEqual;
+import static org.hamcrest.core.IsEqual.equalTo;
+import static org.hamcrest.core.AnyOf.anyOf;
+import static org.hamcrest.core.AllOf.allOf;
+import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertThat;
+import fr.insarouen.asi.asiaventure.Monde;
+import fr.insarouen.asi.asiaventure.elements.Etat;
+import fr.insarouen.asi.asiaventure.NomDEntiteDejaUtiliseDansLeMondeException;
+import fr.insarouen.asi.asiaventure.elements.structure.Piece;
+import fr.insarouen.asi.asiaventure.elements.structure.Porte;
+
+
+public class testClassPorte{
+    public Piece pieceA;
+    public Piece pieceB;
+    public Etat etat;
+    public String nom;
+    public Monde monde;
+    public Porte porte;
+
+    @Before
+    public void avantTest() throws Exception{
+	monde = new Monde ("Planete Terre");
+	porte = new Porte ("Porte d'entrée",monde,pieceA,pieceB);
+    }
+
+    @Test
+    public void testConstructeur (){
+	assertThat(porte.getMonde(),equalTo(monde));
+	assertThat(porte.getNom(),equalTo("Porte d'entrée"));
+	assertThat(porte.pieceA,equalTo(pieceA));
+	assertThat(porte.pieceB,equalTo(pieceB));
+	assertThat(porte.etat,equalTo(Etat.FERME));
+    }
+	
+    @Test
+    public void testGetEtat(){
+	assertThat(porte.getEtat(),equalTo(Etat.FERME));
+    }
+
+    @Test
+    public void testGetPieceAutreCote(){
+	assertThat(porte.getPieceAutreCote(pieceA),equalTo(pieceB));
+	assertThat(porte.getPieceAutreCote(pieceB),equalTo(pieceA));
+    }
+
+    @Test
+    public void testAfficherToString(){
+	System.out.println(porte.toString());
+	assertThat(true,is(true));
+    }
+
+}

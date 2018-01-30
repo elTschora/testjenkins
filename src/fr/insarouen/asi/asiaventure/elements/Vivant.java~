@@ -1,0 +1,45 @@
+package fr.insarouen.asi.asiaventure.elements;
+import java.lang.StringBuilder;
+public class Vivant extends Entite {
+    String nom;
+    Monde monde;
+    int pointVie;
+    int pointForce;
+    Piece piece;
+    Objet[] objets;
+    public Vivant(String nom, Monde monde, int pontVie, int pointForce, Piece piece,Objet[] objets){
+	this.nom=nom;
+        this.monde=monde;
+        this.pointVie=pointVie;
+        this.pointForce=pointForce;
+        this.piece=piece;
+        this.objet=objet;
+    }
+
+    public String toString(){
+	int i;
+	StringBuilder str=new StringBuilder();
+	str.append(nom);
+	str.append("\n");
+	str.append("Habite dans le monde ");
+	str.append(monde.getNom());
+	str.append("\n");
+	str.append("Points de vie : ");
+	str.append(int2String(pointVie));
+	str.append("\n");
+	str.append("Points de Force : ");
+	str.append(int2String(pointForce));
+	str.append("\n");
+	str.append("Est dans la piece : ");
+	str.append("piece.getNom()");
+	str.append("\n");
+	str.append("Possède les objets : ");
+       	for (i=0;i<objets.length;i++)
+	    {
+              	str.append("\n\t\t   ");
+		str.append(getObjet(i).toString());
+	    }
+	return str.toString();
+    }
+}
+	
